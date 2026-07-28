@@ -1,0 +1,3 @@
+import { getDb } from "../../../db";
+import { donations } from "../../../db/schema";
+export async function POST(request:Request){const f=await request.formData(),v=(k:string)=>String(f.get(k)||"").trim();if(!v("name")||!v("email")||!v("amount")||!v("payment_method"))return Response.json({error:"Complete all required fields"},{status:400});await getDb().insert(donations).values({name:v("name"),email:v("email"),phone:v("phone"),amount:v("amount"),currency:v("currency")||"RWF",method:v("payment_method"),frequency:v("frequency")||"One-time",message:v("message"),createdAt:new Date().toISOString()});return Response.redirect(new URL("/donate?submitted=1",request.url),303)}

@@ -1,0 +1,3 @@
+import { getDb } from "../../../db";
+import { volunteers } from "../../../db/schema";
+export async function POST(request:Request){const f=await request.formData();const value=(k:string)=>String(f.get(k)||"").trim();const required=["name","email","phone","district","skills","availability"];if(required.some(k=>!value(k)))return Response.json({error:"Complete all required fields"},{status:400});await getDb().insert(volunteers).values({name:value("name"),email:value("email"),phone:value("phone"),district:value("district"),skills:value("skills"),availability:value("availability"),createdAt:new Date().toISOString()});return Response.redirect(new URL("/volunteer?submitted=1",request.url),303)}
