@@ -6,6 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "postinstall": "node scripts/patch-vinext-windows-assets.mjs",
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
+    "mysql2": "^3.23.2",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"

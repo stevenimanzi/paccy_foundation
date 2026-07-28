@@ -1,31 +1,33 @@
-# vinext-starter
+# Paccy Foundation
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+The Paccy Foundation website and administration system, built with Vinext,
+Drizzle ORM and MySQL.
 
 ## Prerequisites
 
 - Node.js `>=22.13.0`
+- MySQL 8.0 or newer
 
 ## Quick Start
 
-```bash
+```powershell
 npm install
+Copy-Item .dev.vars.example .dev.vars
+# Set DATABASE_URL in .dev.vars, then create the schema:
+mysql -u root -p < database/mysql/001_initial_schema.sql
 npm run dev
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+`DATABASE_URL` uses this format:
 
-## Included Shape
+```text
+mysql://USER:PASSWORD@HOST:3306/paccy_foundation
+```
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+Keep `.dev.vars` private. Production must provide `DATABASE_URL` as a protected
+runtime secret. MySQL stores volunteer requests, donation requests, contact
+messages, editable page content and admin activity.
 
 ## Workspace Auth Headers
 
@@ -95,4 +97,4 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 ## Learn More
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+- [Drizzle MySQL Guide](https://orm.drizzle.team/docs/get-started/mysql-new)
