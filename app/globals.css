@@ -68,3 +68,11 @@ body>main,main{width:100%;max-width:100%;overflow-x:clip}
 @media(max-width:650px){.inner-content{padding:52px 18px}.content-grid{grid-template-columns:1fr;gap:10px}.content-card{padding:21px 19px}.content-card>span{margin-bottom:18px}.content-card h2{font-size:25px}.program-grid{grid-template-columns:1fr}.program-card{min-height:260px}.counters{grid-template-columns:1fr 1fr}.counters>div{min-height:125px;padding:20px 16px}.help-list a{min-height:68px;padding:15px}}
 
 .inner-number{display:none!important}
+
+/* Editorial mission seal replaces the former page-number decoration. */
+.inner-number{display:grid!important;place-items:center;width:190px;height:190px;flex:0 0 190px;border-radius:50%;font-size:0;color:transparent;position:relative;background:radial-gradient(circle at center,#f3b63f 0 10%,transparent 11%),radial-gradient(circle at center,rgba(255,255,255,.1) 0 45%,transparent 46%),linear-gradient(145deg,rgba(16,61,120,.9),rgba(8,29,59,.35));border:1px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 14px rgba(255,255,255,.025),0 22px 55px rgba(0,0,0,.18);transform:rotate(6deg)}
+.inner-number:before{content:"✦";position:absolute;top:24px;left:50%;transform:translateX(-50%);font-size:18px;color:#f3b63f;text-shadow:0 0 24px rgba(243,182,63,.7)}
+.inner-number:after{content:"EDUCATION\\A DIGNITY\\A HOPE";white-space:pre;text-align:center;font-family:var(--font-sans);font-size:10px;line-height:1.8;letter-spacing:.22em;font-weight:800;color:#fff;transform:rotate(-6deg);margin-left:.22em}
+.inner-hero:hover .inner-number{background:radial-gradient(circle at center,#f0643b 0 10%,transparent 11%),radial-gradient(circle at center,rgba(255,255,255,.13) 0 45%,transparent 46%),linear-gradient(145deg,#164b8f,rgba(8,29,59,.35))}
+@media(max-width:900px){.inner-number{display:none!important}}
+@media(prefers-reduced-motion:no-preference){.inner-number:before{animation:seal-glow 2.8s ease-in-out infinite}@keyframes seal-glow{50%{transform:translateX(-50%) scale(1.25);opacity:.65}}}
