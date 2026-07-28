@@ -66,3 +66,5 @@ body>main,main{width:100%;max-width:100%;overflow-x:clip}
 .payment-tags span{border-radius:999px;padding:7px 10px}.quick-donate-form{border-radius:14px}.full-form{border-radius:14px}.contact-layout aside{border-radius:14px}
 @media(max-width:1050px){.content-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.program-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.inner-content{padding:52px 18px}.content-grid{grid-template-columns:1fr;gap:10px}.content-card{padding:21px 19px}.content-card>span{margin-bottom:18px}.content-card h2{font-size:25px}.program-grid{grid-template-columns:1fr}.program-card{min-height:260px}.counters{grid-template-columns:1fr 1fr}.counters>div{min-height:125px;padding:20px 16px}.help-list a{min-height:68px;padding:15px}}
+
+.inner-number{display:none!important}
