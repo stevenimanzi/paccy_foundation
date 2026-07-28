@@ -12,12 +12,12 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Paccy Foundation home">
           <img src="/images/paccy_faundation_logo.png" alt="" />
-          <span><strong>Paccy</strong> Foundation<small>Education • Dignity • Hope</small></span>
+          <span><strong>Paccy</strong> Foundation<small>Every Child Deserves a Chance to Learn.</small></span>
         </a>
         <nav aria-label="Main navigation">
-          <a href="/">Home</a><a href="/about">About</a><a href="/programs">Programs</a><a href="/get-involved">Get involved</a>
+          <a href="/">Home</a><a href="/about">About</a><a href="/programs">Programs</a><a href="/news">Articles</a><a href="/get-involved">Get involved</a>
         </nav>
-        <details className="all-pages-menu"><summary>Explore <span>⌄</span></summary><div><a href="/">Home</a><a href="/about">About Us</a><a href="/founder">Founder</a><a href="/programs">Our Programs</a><a href="/who-we-help">Who We Help</a><a href="/get-involved">Get Involved</a><a href="/donate">Donate</a><a href="/volunteer">Volunteer</a><a href="/partners">Partners</a><a href="/news">News & Blog</a><a href="/events">Events</a><a href="/gallery">Gallery</a><a href="/success-stories">Success Stories</a><a href="/faq">FAQ</a><a href="/contact">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms & Conditions</a><a href="/child-protection">Child Protection</a></div></details>
+        <details className="all-pages-menu"><summary>Explore <span>⌄</span></summary><div><a href="/">Home</a><a href="/about">About Us</a><a href="/founder">Founder</a><a href="/programs">Our Programs</a><a href="/who-we-help">Who We Help</a><a href="/get-involved">Get Involved</a><a href="/donate">Donate</a><a href="/volunteer">Volunteer</a><a href="/partners">Partners</a><a href="/news">Articles</a><a href="/events">Events</a><a href="/gallery">Gallery</a><a href="/success-stories">Success Stories</a><a href="/faq">FAQ</a><a href="/contact">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a><a href="/child-protection">Child Protection Policy</a></div></details>
         <a className="button button-small" href="/donate">Donate now <span>↗</span></a>
       </header>
 
