@@ -5,13 +5,6 @@ const programs = [
   ["04", "Wellbeing", "Hygiene education and nutrition support that help children thrive at school."],
 ];
 
-const donationOptions = [
-  ["$10", "A learning kit", "Pens, notebooks and essential supplies"],
-  ["$25", "A school uniform", "Confidence and belonging for one learner"],
-  ["$50", "School fees", "A meaningful contribution toward one term"],
-  ["$100", "A child’s future", "Comprehensive support where it is needed most"],
-];
-
 export default function Home() {
   return (
     <main>
@@ -89,8 +82,8 @@ export default function Home() {
       </section>
 
       <section className="donate" id="donate">
-        <div className="donate-copy"><p className="section-label light">Give with purpose</p><h2>What could your<br />gift make possible?</h2><p>Choose an amount or give what feels right. Mobile Money and bank transfer giving will open with our first campaign.</p><div className="payment-tags"><span>MTN MoMo</span><span>Airtel Money</span><span>Bank transfer</span></div></div>
-        <div className="amounts">{donationOptions.map(([amount, title, text]) => <button key={amount}><strong>{amount}</strong><span><b>{title}</b>{text}</span><i>→</i></button>)}<button className="custom-amount"><strong>Other</strong><span><b>Choose your amount</b>Every gift moves a child closer to school.</span><i>→</i></button></div>
+        <div className="donate-copy"><p className="section-label light">Give with purpose</p><h2>Give what you<br />are able to give.</h2><p>There is no required donation amount. Choose the value that is right for you and select your preferred payment method.</p><div className="payment-tags"><span>MTN MoMo</span><span>Airtel Money</span><span>Bank transfer</span><span>Card</span></div></div>
+        <form className="quick-donate-form" action="/donate"><label>Your donation amount<div><select name="currency" aria-label="Currency"><option>RWF</option><option>USD</option><option>EUR</option><option>GBP</option></select><input name="amount" type="number" min="1" step="any" required placeholder="Enter any amount" /></div></label><label>Preferred payment method<select name="method" required defaultValue=""><option value="" disabled>Choose a payment method</option><option>MTN MoMo</option><option>Airtel Money</option><option>Bank transfer</option><option>Credit or debit card</option><option>PayPal</option></select></label><button className="button" type="submit">Continue to donate <span>→</span></button></form>
       </section>
 
       <section className="launch-card" id="sponsor"><div><p className="section-label">Child sponsorship</p><h2>One child.<br />One champion.</h2><p>Our sponsorship program is launching soon. Join the early list and we’ll let you know when verified child profiles become available.</p><a className="button dark" href="mailto:hello@paccyfoundation.org?subject=Sponsorship interest">Join the early list <span>→</span></a></div><div className="launch-badge"><span>Launching</span><strong>Soon</strong><small>Rwanda · 2026</small></div></section>

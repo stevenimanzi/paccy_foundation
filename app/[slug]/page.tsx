@@ -42,11 +42,9 @@ const pages: Record<string, PageInfo> = {
     { title: "Launching soon", text: "Join the early-interest list and we will contact you when the first verified sponsorship opportunities open." },
   ]},
   donate: { eyebrow: "Give with purpose", title: "Your gift becomes something practical.", intro: "Giving channels will open with our first verified campaign. Every published appeal will show the need, budget and intended outcome.", sections: [
-    { title: "$10 — School supplies", text: "Pens, notebooks and everyday learning essentials." },
-    { title: "$25 — A uniform", text: "Confidence, belonging and readiness for one learner." },
-    { title: "$50 — School fees", text: "A meaningful contribution toward a child's term." },
-    { title: "$100 — Comprehensive support", text: "Support where it is most needed across a verified education plan." },
-    { title: "Payment methods", text: "Mobile Money and bank transfer will launch first, followed by secure card and PayPal options.", items: ["MTN MoMo", "Airtel Money", "Bank transfer", "Credit or debit card", "PayPal"] },
+    { title: "You choose the amount", text: "There is no fixed or expected donation value. Give only what is comfortable and appropriate for you." },
+    { title: "Where support goes", text: "Donations support verified education needs such as learning materials, uniforms, fees, mentoring and learner wellbeing." },
+    { title: "Payment methods", text: "Choose the payment route that works best for you.", items: ["MTN MoMo", "Airtel Money", "Bank transfer", "Credit or debit card", "PayPal"] },
   ]},
   volunteer: { eyebrow: "Volunteer", title: "Bring what you know. Change what is possible.", intro: "We welcome thoughtful volunteers who care about education, dignity, safeguarding and accountable community work.", sections: [] },
   partners: { eyebrow: "Partner with us", title: "Let collective action become lasting access.", intro: "We build values-aligned partnerships around real needs, clear responsibilities and measurable outcomes.", sections: [
@@ -182,6 +180,10 @@ function Header() {
 }
 
 function FormPage({ slug }: { slug: string }) {
+  if (slug === "donate") return <form className="full-form donation-form" action="mailto:hello@paccyfoundation.org" method="post" encType="text/plain">
+    <h3 className="form-title">Your donation</h3><label className="amount-field">Amount<div><select name="currency" aria-label="Currency"><option>RWF</option><option>USD</option><option>EUR</option><option>GBP</option></select><input type="number" name="amount" min="1" step="any" required placeholder="Enter any amount" /></div></label><label>Payment method<select name="payment_method" required defaultValue=""><option value="" disabled>Select payment method</option><option>MTN MoMo</option><option>Airtel Money</option><option>Bank transfer</option><option>Credit or debit card</option><option>PayPal</option></select></label>
+    <h3 className="form-title">Your details</h3><label>Full name<input name="name" required /></label><label>Email for receipt<input type="email" name="email" required /></label><label>Phone number<input type="tel" name="phone" /></label><label>Donation frequency<select name="frequency"><option>One-time</option><option>Monthly</option></select></label><label className="wide">Optional message<textarea name="message" rows={3} placeholder="Share a note with the foundation" /></label><label className="consent wide"><input type="checkbox" required /> I confirm that I am choosing this amount freely and would like payment instructions for my selected method.</label><button className="button wide" type="submit">Request payment instructions <span>→</span></button>
+  </form>;
   if (slug === "volunteer") return <form className="full-form" action="mailto:hello@paccyfoundation.org" method="post" encType="text/plain">
     <label>Full name<input name="name" required /></label><label>Email address<input type="email" name="email" required /></label><label>Phone<input type="tel" name="phone" required /></label><label>District<input name="district" required /></label><label>Skills and experience<textarea name="skills" rows={4} required /></label><label>Availability<select name="availability" defaultValue=""><option value="" disabled>Select availability</option><option>Weekdays</option><option>Weekends</option><option>Flexible</option><option>Remote only</option></select></label><label className="wide">CV or profile document<input type="file" name="cv" accept=".pdf,.doc,.docx" /></label><button className="button wide" type="submit">Submit volunteer interest <span>→</span></button>
   </form>;
