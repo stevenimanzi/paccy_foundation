@@ -43,6 +43,21 @@ CREATE TABLE IF NOT EXISTS `messages` (
   INDEX `messages_status_idx` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `message_replies` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `message_id` INT NOT NULL,
+  `recipient_email` VARCHAR(190) NOT NULL,
+  `subject` VARCHAR(255) NOT NULL,
+  `body` TEXT NOT NULL,
+  `status` VARCHAR(30) NOT NULL DEFAULT 'sent',
+  `provider_message_id` VARCHAR(255) NULL,
+  `error_message` TEXT NULL,
+  `sent_by` VARCHAR(190) NOT NULL,
+  `sent_at` VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `message_replies_message_id_idx` (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `site_content` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `page` VARCHAR(100) NOT NULL,

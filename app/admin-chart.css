@@ -1,0 +1,21 @@
+.admin-stats .traffic-chart-card{grid-column:1/-1;display:block;min-height:0;padding:0;overflow:hidden}
+.admin-stats .traffic-chart-card:before{display:none}
+.traffic-chart-card>header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #e9edf2}
+.traffic-chart-card>header>div:first-child{display:flex;align-items:center;gap:12px}
+.traffic-chart-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:#eaf1ff;color:#2867dc;font-size:18px;font-weight:850}
+.traffic-chart-card h2{margin:0;font-family:var(--font-sans);font-size:18px;font-weight:850}
+.traffic-chart-card header p{margin:4px 0 0;color:#8a929e;font-size:10px}
+.traffic-chart-period{padding:8px 10px;border:1px solid #e0e5ec;border-radius:8px;color:#66707e;font-size:9px;font-weight:750}
+.traffic-chart-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border-bottom:1px solid #edf0f4;background:#edf0f4}
+.traffic-chart-summary>div{padding:14px 18px;background:#fff}
+.traffic-chart-summary small{display:block;color:#8d95a1;font-size:9px}
+.traffic-chart-summary strong{display:block;margin-top:5px;font-size:20px}
+.traffic-chart-summary strong:not(.down){color:#215fcb}
+.traffic-chart-summary strong.down{color:#a64242}
+.traffic-chart-canvas{position:relative;height:300px;padding:14px 16px 6px}
+.traffic-chart-canvas canvas{display:block;width:100%;height:100%;cursor:crosshair}
+.traffic-chart-detail{position:absolute;top:18px;right:20px;display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #e1e6ed;border-radius:8px;background:rgba(255,255,255,.92);box-shadow:0 6px 18px rgba(24,35,53,.08);font-size:9px}
+.traffic-chart-detail b{color:#242a33}
+.traffic-chart-detail span{color:#747e8c}
+@media(max-width:720px){.traffic-chart-summary{grid-template-columns:1fr 1fr}.traffic-chart-canvas{height:260px;padding-inline:4px}.traffic-chart-detail{top:8px;right:8px;gap:6px}.traffic-chart-detail span:last-child{display:none}}
+@media(max-width:430px){.traffic-chart-card>header{align-items:flex-start}.traffic-chart-summary>div{padding:12px}.traffic-chart-summary strong{font-size:18px}.traffic-chart-canvas{height:230px}}

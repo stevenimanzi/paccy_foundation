@@ -4,6 +4,9 @@ import { headers } from "next/headers";
 import { NavEnhancer } from "./NavEnhancer";
 import { PageTracker } from "./PageTracker";
 import "./globals.css";
+import "./admin-responsive.css";
+import "./admin-chart.css";
+import "./admin-brand.css";
 
 const sans = DM_Sans({ variable: "--font-sans", subsets: ["latin"] });
 const serif = Fraunces({ variable: "--font-serif", subsets: ["latin"], style: ["normal", "italic"] });

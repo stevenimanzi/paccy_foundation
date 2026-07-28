@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { getDb } from "../../../db";
-import { activity, content, donations, galleryItems, messages, volunteers } from "../../../db/schema";
+import { activity, content, donations, galleryItems, messages, users, volunteers } from "../../../db/schema";
 import { getCurrentUser } from "../../auth";
 
 export async function POST(request:Request){
@@ -25,8 +25,8 @@ export async function POST(request:Request){
 export async function PATCH(request:Request){
   const user=await getCurrentUser(); if(!user)return Response.json({error:"Unauthorized"},{status:401});
   const {type,id,status}=await request.json() as {type:string;id:number;status:string};
-  const allowed=["new","pending","reviewed","approved","completed","declined","unread","read"]; if(!allowed.includes(status))return Response.json({error:"Invalid status"},{status:400});
-  const table=type==="volunteer"?volunteers:type==="donation"?donations:type==="message"?messages:null;
+  const allowed=["active","suspended","new","pending","reviewed","approved","completed","declined","unread","read","replied"]; if(!allowed.includes(status))return Response.json({error:"Invalid status"},{status:400});
+  const table=type==="volunteer"?volunteers:type==="donation"?donations:type==="message"?messages:type==="user"?users:null;
   if(!table)return Response.json({error:"Invalid record type"},{status:400});
   const db=getDb(); await db.update(table).set({status}).where(eq(table.id,id));
   await db.insert(activity).values({actor:user.email,action:`changed status to ${status}`,entity:type,entityId:id,createdAt:new Date().toISOString()});

@@ -1,1 +1,4 @@
 DATABASE_URL=mysql://USER:PASSWORD@127.0.0.1:3306/paccy_foundation
+RESEND_API_KEY=
+EMAIL_FROM=Paccy Foundation <hello@your-domain.org>
+EMAIL_REPLY_TO=hello@your-domain.org

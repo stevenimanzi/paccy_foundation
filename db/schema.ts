@@ -35,6 +35,19 @@ export const messages = mysqlTable("messages", {
   createdAt: varchar("created_at", { length: 40 }).notNull(),
 });
 
+export const messageReplies = mysqlTable("message_replies", {
+  id: int("id").autoincrement().primaryKey(),
+  messageId: int("message_id").notNull(),
+  recipientEmail: varchar("recipient_email", { length: 190 }).notNull(),
+  subject: varchar("subject", { length: 255 }).notNull(),
+  body: text("body").notNull(),
+  status: varchar("status", { length: 30 }).notNull().default("sent"),
+  providerMessageId: varchar("provider_message_id", { length: 255 }),
+  errorMessage: text("error_message"),
+  sentBy: varchar("sent_by", { length: 190 }).notNull(),
+  sentAt: varchar("sent_at", { length: 40 }).notNull(),
+});
+
 export const content = mysqlTable("site_content", {
   id: int("id").autoincrement().primaryKey(),
   page: varchar("page", { length: 100 }).notNull(),

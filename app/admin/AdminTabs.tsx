@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const tabs = [
@@ -20,6 +20,7 @@ function validTab(value: string): string {
 
 export function AdminTabs() {
   const router = useRouter();
+  const [menuOpen,setMenuOpen]=useState(false);
   useEffect(() => {
     const showTab = (tabId: string) => {
       const selected = validTab(tabId);
@@ -27,7 +28,10 @@ export function AdminTabs() {
         section.hidden = section.id !== selected;
       });
       document.querySelectorAll<HTMLAnchorElement>(".admin-sidebar nav a").forEach((link) => {
-        link.classList.toggle("is-active", link.getAttribute("href") === `#${selected}`);
+        const isActive = link.getAttribute("href") === `#${selected}`;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
       });
     };
 
@@ -42,5 +46,20 @@ export function AdminTabs() {
       window.clearInterval(refreshTimer);
     };
   }, [router]);
-  return null;
+  useEffect(()=>{
+    const sidebar=document.querySelector(".admin-sidebar");
+    sidebar?.classList.toggle("mobile-menu-open",menuOpen);
+    document.body.classList.toggle("admin-menu-open",menuOpen);
+    const close=()=>setMenuOpen(false);
+    sidebar?.querySelectorAll("nav a").forEach(link=>link.addEventListener("click",close));
+    const escape=(event:KeyboardEvent)=>{if(event.key==="Escape")setMenuOpen(false)};
+    window.addEventListener("keydown",escape);
+    return ()=>{
+      sidebar?.classList.remove("mobile-menu-open");
+      document.body.classList.remove("admin-menu-open");
+      sidebar?.querySelectorAll("nav a").forEach(link=>link.removeEventListener("click",close));
+      window.removeEventListener("keydown",escape);
+    };
+  },[menuOpen]);
+  return <><button className="admin-menu-toggle" type="button" aria-label={menuOpen?"Close menu":"Open menu"} aria-expanded={menuOpen} onClick={()=>setMenuOpen(value=>!value)}><span/><span/><span/></button>{menuOpen&&<button className="admin-menu-backdrop" type="button" aria-label="Close menu" onClick={()=>setMenuOpen(false)}/>}</>;
 }
