@@ -52,7 +52,7 @@ const pages: Record<string, PageInfo> = {
     { title: "Ways to partner", text: "Fund a program, contribute materials, share expertise, host an activation, support research or open access to services." },
     { title: "Our promise", text: "Every partnership begins with clear objectives and ends with a useful account of resources, activities and results." },
   ]},
-  news: { eyebrow: "News & ideas", title: "Learning, action and the road ahead.", intro: "Perspectives on education, vulnerability and the practical choices that transform communities.", sections: [
+  news: { eyebrow: "Articles & ideas", title: "Learning, action and the road ahead.", intro: "Perspectives on education, vulnerability and the practical choices that transform communities.", sections: [
     { title: "Why education changes lives", text: "Education grows choice, confidence and the ability to participate fully in family and community life." },
     { title: "Challenges facing vulnerable children", text: "A closer look at the connected financial, social and geographic barriers to staying in school." },
     { title: "Why school materials matter", text: "The small essentials that influence attendance, belonging and classroom participation." },
