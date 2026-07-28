@@ -1,19 +1,19 @@
 /* Administration palette matched to the public Paccy Foundation website. */
-.admin-shell{--admin-primary:var(--orange);--admin-dark:var(--forest);--admin-gold:var(--sun);--admin-soft:#fff3ed;--admin-cream:#faf7f0;background:var(--admin-cream);color:var(--ink)}
+.admin-shell{--admin-primary:#082a57;--admin-dark:#061f43;--admin-gold:var(--sun);--admin-soft:#eaf1fb;--admin-cream:#f6f8fb;background:var(--admin-cream);color:#10233e}
 .admin-sidebar{border-bottom-color:#e4ded2!important;background:rgba(255,253,248,.97)!important}
 .admin-brand{color:var(--ink)!important}
 .admin-search{border-color:#e3ddd2;background:#fffdf8}
 .admin-search span,.admin-main .section-label,.admin-tab-analytics b{color:var(--admin-primary)}
 .admin-search input{color:var(--ink)}
 .admin-sidebar nav a:hover{background:#f6eee7!important;color:var(--ink)!important}
-.admin-sidebar nav a.is-active,.admin-sidebar nav a[aria-current="page"]{background:var(--admin-soft)!important;color:#c94d29!important;box-shadow:inset 0 0 0 1px #f3d5c8!important}
+.admin-sidebar nav a.is-active,.admin-sidebar nav a[aria-current="page"]{background:var(--admin-soft)!important;color:var(--admin-primary)!important;box-shadow:inset 0 0 0 1px #cad9ee!important}
 .admin-sidebar nav a.is-active:after,.admin-sidebar nav a[aria-current="page"]:after{background:var(--admin-primary)!important}
-.admin-main .button,.admin-premium-toolbar button.primary,.add-user-button,.message-reply-trigger,.reply-send{background:var(--admin-primary)!important;border-color:var(--admin-primary)!important;box-shadow:0 7px 20px rgba(239,101,56,.17)!important}
-.admin-main .button:hover,.add-user-button:hover,.message-reply-trigger:hover,.reply-send:hover{background:#d9522c!important}
+.admin-main .button,.admin-premium-toolbar button.primary,.add-user-button,.message-reply-trigger,.reply-send{background:var(--admin-primary)!important;border-color:var(--admin-primary)!important;box-shadow:0 7px 20px rgba(8,42,87,.17)!important}
+.admin-main .button:hover,.add-user-button:hover,.message-reply-trigger:hover,.reply-send:hover{background:#0d3b75!important}
 .admin-hero-icon{background:var(--admin-dark)!important;box-shadow:0 12px 25px rgba(23,74,64,.18)!important}
-.admin-live-status i{background:var(--admin-primary);box-shadow:0 0 0 4px #ffebe3}
+.admin-live-status i{background:var(--admin-primary);box-shadow:0 0 0 4px #e7eef8}
 .admin-tab-analytics span,.admin-premium-toolbar,.admin-panel,.admin-stats article{border-color:#e7e0d5;background:#fffdf9}
-.admin-stats article:before,.traffic-chart-icon,.reply-modal-icon,.user-modal>header>div>span{background:#fff0e9;color:var(--admin-primary)}
+.admin-stats article:before,.traffic-chart-icon,.reply-modal-icon,.user-modal>header>div>span{background:#eaf1fb;color:var(--admin-primary)}
 .admin-stats strong,.traffic-chart-summary strong:not(.down){color:var(--admin-dark)}
 .admin-panel>header:after{background:#f7f1e9;color:#776f65}
 .admin-table-wrap tbody tr:hover{background:#fff9f3}
@@ -21,8 +21,8 @@
 .admin-content-form,.user-security-note{background:#fcf8f2}
 .traffic-chart-period{border-color:#e5ddd1;background:#fffaf5;color:#6e665d}
 .traffic-chart-detail{border-color:#e5ddd1;background:rgba(255,253,248,.95)}
-.reply-modal input:focus,.reply-modal textarea:focus,.user-form-grid input:focus,.user-form-grid select:focus{border-color:var(--admin-primary);box-shadow:0 0 0 3px rgba(239,101,56,.12)}
+.reply-modal input:focus,.reply-modal textarea:focus,.user-form-grid input:focus,.user-form-grid select:focus{border-color:var(--admin-primary);box-shadow:0 0 0 3px rgba(8,42,87,.12)}
 .reply-modal header p,.user-modal header p{color:var(--admin-primary)}
 .admin-notice{border-color:#f0d5c8;background:#fff4ee;color:#90452e}
-.admin-menu-toggle[aria-expanded="true"]{border-color:#efc5b4;background:#fff3ed}
+.admin-menu-toggle[aria-expanded="true"]{border-color:#b9cae2;background:#eef3fa}
 @media(max-width:720px){.admin-shell .admin-sidebar nav{border-color:#e5ddd2!important;background:#fffdf8!important}.admin-menu-backdrop{background:rgba(18,60,53,.34)}.admin-table-wrap:after{background:#fff0e9;color:#845844}.admin-table-wrap th,.admin-table-wrap th:first-child{background:#faf6ef}.admin-table-wrap td:first-child{background:#fffdf9}}

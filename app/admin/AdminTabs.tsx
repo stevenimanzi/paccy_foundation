@@ -37,12 +37,27 @@ export function AdminTabs() {
 
     const fromHash = validTab(window.location.hash.slice(1));
     showTab(fromHash);
+    window.requestAnimationFrame(()=>window.scrollTo({top:0,behavior:"instant"}));
 
-    const handleHash = () => showTab(window.location.hash.slice(1));
+    const handleHash = () => {
+      showTab(window.location.hash.slice(1));
+      window.scrollTo({top:0,behavior:"instant"});
+    };
+    const handleNavigation = (event:Event) => {
+      const link=(event.target as HTMLElement).closest<HTMLAnchorElement>(".admin-sidebar nav a");
+      if(!link)return;
+      event.preventDefault();
+      const selected=validTab(link.hash.slice(1));
+      window.history.replaceState(null,"",`#${selected}`);
+      showTab(selected);
+      window.scrollTo({top:0,behavior:"smooth"});
+    };
     window.addEventListener("hashchange", handleHash);
+    document.addEventListener("click",handleNavigation);
     const refreshTimer = window.setInterval(() => router.refresh(), 10_000);
     return () => {
       window.removeEventListener("hashchange", handleHash);
+      document.removeEventListener("click",handleNavigation);
       window.clearInterval(refreshTimer);
     };
   }, [router]);

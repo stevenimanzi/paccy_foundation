@@ -21,6 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    icons: {
+      icon: [
+        { url: "/images/paccy_faundation_logo.png", type: "image/png", sizes: "any" },
+      ],
+      shortcut: "/images/paccy_faundation_logo.png",
+      apple: "/images/paccy_faundation_logo.png",
+    },
     openGraph: { title, description, type: "website", url: origin, images: [{ url: `${origin}/og.png`, width: 1200, height: 630 }] },
     twitter: { card: "summary_large_image", title, description, images: [`${origin}/og.png`] },
   };
