@@ -22,9 +22,9 @@ export default function Home() {
           <span><strong>Paccy</strong> Foundation<small>Education • Dignity • Hope</small></span>
         </a>
         <nav aria-label="Main navigation">
-          <a href="#about">About</a><a href="#programs">Programs</a><a href="#impact">Impact</a><a href="#help">Get involved</a>
+          <a href="/about">About</a><a href="/programs">Programs</a><a href="/transparency">Transparency</a><a href="/get-involved">Get involved</a>
         </nav>
-        <a className="button button-small" href="#donate">Donate now <span>↗</span></a>
+        <a className="button button-small" href="/donate">Donate now <span>↗</span></a>
       </header>
 
       <section className="hero" id="top">
@@ -33,8 +33,8 @@ export default function Home() {
           <h1>Every child deserves a <em>chance to learn.</em></h1>
           <p className="hero-text">We help children from vulnerable families stay in school—with fees, uniforms, learning materials, mentorship and care.</p>
           <div className="hero-actions">
-            <a className="button" href="#donate">Support a child <span>↗</span></a>
-            <a className="text-link" href="#volunteer">Become a volunteer <span>→</span></a>
+            <a className="button" href="/donate">Support a child <span>↗</span></a>
+            <a className="text-link" href="/volunteer">Become a volunteer <span>→</span></a>
           </div>
           <div className="trust-row"><span className="trust-mark">✓</span><p><strong>Transparent from day one</strong><br />Every contribution is tracked and reported.</p></div>
         </div>
@@ -50,7 +50,7 @@ export default function Home() {
         <div className="purpose-copy">
           <p>Paccy Foundation is a Rwandan-led nonprofit preparing to make education possible for children whose circumstances put their future at risk.</p>
           <p>We believe support should be personal, accountable and built to last. That means listening to families, partnering with schools, and walking alongside every child.</p>
-          <a className="line-link" href="#founder">Our story & vision <span>→</span></a>
+          <a className="line-link" href="/about">Our story & vision <span>→</span></a>
         </div>
         <div className="values">
           <span>Integrity</span><span>Compassion</span><span>Transparency</span><span>Equality</span><span>Accountability</span><span>Education first</span>
@@ -68,7 +68,7 @@ export default function Home() {
         <div className="people-image"><img src="/images/rwanda-classroom.jpg" alt="Young learners writing in their notebooks" /></div>
         <div className="people-copy"><p className="section-label">Who we help</p><h2>For the child with the <em>will,</em><br />but not the means.</h2><p>We are building a fair, careful selection process with schools and communities to reach children who:</p>
           <ul><li>have lost one or both parents</li><li>live in poverty or rural communities</li><li>are at risk of leaving school</li><li>live with disabilities</li></ul>
-          <a className="line-link" href="#contact">Learn about eligibility <span>→</span></a>
+          <a className="line-link" href="/who-we-help">Learn about eligibility <span>→</span></a>
         </div>
       </section>
 
@@ -80,10 +80,10 @@ export default function Home() {
       <section className="help" id="help">
         <div className="help-intro"><p className="section-label">How you can help</p><h2>There is a place for<br /><em>you</em> in this story.</h2><p>Give once, walk with a child monthly, share your skills, or open a door through your organization.</p></div>
         <div className="help-list">
-          <a href="#donate"><span>01</span><strong>Make a donation</strong><i>Give what you can, where it matters most.</i><b>↗</b></a>
-          <a href="#sponsor"><span>02</span><strong>Sponsor a child</strong><i>Build a personal bridge to a brighter future.</i><b>↗</b></a>
-          <a href="#volunteer"><span>03</span><strong>Volunteer with us</strong><i>Bring your time, care and professional skills.</i><b>↗</b></a>
-          <a href="#partner"><span>04</span><strong>Become a partner</strong><i>Turn collective action into sustained impact.</i><b>↗</b></a>
+          <a href="/donate"><span>01</span><strong>Make a donation</strong><i>Give what you can, where it matters most.</i><b>↗</b></a>
+          <a href="/sponsor-child"><span>02</span><strong>Sponsor a child</strong><i>Build a personal bridge to a brighter future.</i><b>↗</b></a>
+          <a href="/volunteer"><span>03</span><strong>Volunteer with us</strong><i>Bring your time, care and professional skills.</i><b>↗</b></a>
+          <a href="/partners"><span>04</span><strong>Become a partner</strong><i>Turn collective action into sustained impact.</i><b>↗</b></a>
         </div>
       </section>
 
