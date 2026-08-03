@@ -21,21 +21,27 @@ export async function POST(request: Request) {
 
   if (!email || !password) return Response.redirect(fail, 303);
 
-  const db = getDb();
-  const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
-  if (!user || user.status !== "active" || !verifyPassword(password, user.passwordHash)) {
+  try {
+    const db = getDb();
+    const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    if (!user || user.status !== "active" || !verifyPassword(password, user.passwordHash)) {
+      return Response.redirect(fail, 303);
+    }
+
+    const now = new Date().toISOString();
+    await db.update(users).set({ lastLoginAt: now }).where(eq(users.id, user.id));
+    await db.insert(activity).values({
+      actor: user.email,
+      action: "signed in",
+      entity: "user",
+      entityId: user.id,
+      createdAt: now,
+    });
+    await createSession(user.id);
+    return Response.redirect(new URL(returnTo, request.url), 303);
+  } catch (error) {
+    console.error("Auth login failed:", error);
+    fail.searchParams.set("error", "The login service is temporarily unavailable. Configure a supported database runtime and try again.");
     return Response.redirect(fail, 303);
   }
-
-  const now = new Date().toISOString();
-  await db.update(users).set({ lastLoginAt: now }).where(eq(users.id, user.id));
-  await db.insert(activity).values({
-    actor: user.email,
-    action: "signed in",
-    entity: "user",
-    entityId: user.id,
-    createdAt: now,
-  });
-  await createSession(user.id);
-  return Response.redirect(new URL(returnTo, request.url), 303);
 }

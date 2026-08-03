@@ -1,6 +1,5 @@
 import vinext from "vinext";
 import { defineConfig, loadEnv } from "vite";
-import { sites } from "./build/sites-vite-plugin";
 import { kvDataAdapter } from "@vinext/cloudflare/cache/kv-data-adapter";
 import { cdnAdapter } from "@vinext/cloudflare/cache/cdn-adapter";
 import { imagesOptimizer } from "@vinext/cloudflare/images/images-optimizer";
@@ -12,9 +11,6 @@ const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
 const { d1, r2 } = hostingConfig;
-
-// macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
-const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
 export default defineConfig(async ({ mode }) => {
   const runtimeEnv = loadEnv(mode, process.cwd(), "");
@@ -54,16 +50,12 @@ export default defineConfig(async ({ mode }) => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
     plugins: [
       vinext({
         cache: { data: kvDataAdapter(), cdn: cdnAdapter() },
         images: { optimizer: imagesOptimizer() },
         prerender: { routes: "*" },
       }),
-      sites(),
       cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         config: localBindingConfig,

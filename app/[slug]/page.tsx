@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { desc, eq } from "drizzle-orm";
+import DistrictSelect from "../components/DistrictSelect";
 import { getDb } from "../../db";
 import { content } from "../../db/schema";
 
@@ -182,14 +183,17 @@ function Header() {
   return <><div className="announcement">A child’s future begins in a classroom. <a href="/get-involved">Join the movement →</a></div><header className="site-header inner-header"><a className="brand" href="/"><img src="/images/paccy_faundation_logo.png" alt="Paccy Foundation logo" /><span><strong>Paccy</strong> Foundation<small>Every Child Deserves a Chance to Learn.</small></span></a><nav aria-label="Main navigation"><a href="/">Home</a><a href="/about">About</a><a href="/programs">Programs</a><a href="/news">Articles</a><a href="/get-involved">Get involved</a></nav><details className="all-pages-menu"><summary>Explore</summary><div><a href="/">Home</a><a href="/about">About Us</a><a href="/founder">Founder</a><a href="/programs">Our Programs</a><a href="/who-we-help">Who We Help</a><a href="/get-involved">Get Involved</a><a href="/donate">Donate</a><a href="/volunteer">Volunteer</a><a href="/partners">Partners</a><a href="/news">Articles</a><a href="/events">Events</a><a href="/gallery">Gallery</a><a href="/success-stories">Success Stories</a><a href="/faq">FAQ</a><a href="/contact">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a><a href="/child-protection">Child Protection Policy</a></div></details><a className="button button-small" href="/donate">Donate now <span>↗</span></a></header></>;
 }
 
-function FormPage({ slug }: { slug: string }) {
+function FormPage({ slug, notice }: { slug: string; notice?: { type: "success" | "error"; text: string } }) {
   if (slug === "donate") return <form className="full-form donation-form" action="/api/donations" method="post">
     <h3 className="form-title">Your donation</h3><label className="amount-field">Amount<div><select name="currency" aria-label="Currency"><option>RWF</option><option>USD</option><option>EUR</option><option>GBP</option></select><input type="number" name="amount" min="1" step="any" required placeholder="Enter any amount" /></div></label><label>Payment method<select name="payment_method" required defaultValue=""><option value="" disabled>Select payment method</option><option>MTN MoMo</option><option>Airtel Money</option><option>Bank transfer</option><option>Credit or debit card</option><option>PayPal</option></select></label>
     <h3 className="form-title">Your details</h3><label>Full name<input name="name" required /></label><label>Email for receipt<input type="email" name="email" required /></label><label>Phone number<input type="tel" name="phone" /></label><label>Donation frequency<select name="frequency"><option>One-time</option><option>Monthly</option></select></label><label className="wide">Optional message<textarea name="message" rows={3} placeholder="Share a note with the foundation" /></label><label className="consent wide"><input type="checkbox" required /> I confirm that I am choosing this amount freely and would like payment instructions for my selected method.</label><button className="button wide" type="submit">Request payment instructions <span>→</span></button>
   </form>;
-  if (slug === "volunteer") return <form className="full-form" action="/api/volunteers" method="post">
-    <label>Full name<input name="name" required /></label><label>Email address<input type="email" name="email" required /></label><label>Phone<input type="tel" name="phone" required /></label><label>District<input name="district" required /></label><label>Skills and experience<textarea name="skills" rows={4} required /></label><label>Availability<select name="availability" defaultValue=""><option value="" disabled>Select availability</option><option>Weekdays</option><option>Weekends</option><option>Flexible</option><option>Remote only</option></select></label><label className="wide">CV or profile document<input type="file" name="cv" accept=".pdf,.doc,.docx" /></label><button className="button wide" type="submit">Submit volunteer interest <span>→</span></button>
-  </form>;
+  if (slug === "volunteer") return <>
+    {notice && <div className={notice.type === "success" ? "form-notice success" : "form-notice error"} role="status">{notice.text}</div>}
+    <form className="full-form" action="/api/volunteers" method="post">
+      <label>Full name<input name="name" required /></label><label>Email address<input type="email" name="email" required /></label><label>Phone<input type="tel" name="phone" required /></label><label>District<DistrictSelect /></label><label>Skills and experience<textarea name="skills" rows={4} required /></label><label>Availability<select name="availability" defaultValue="" required><option value="" disabled>Select availability</option><option>Weekdays</option><option>Weekends</option><option>Flexible</option><option>Remote only</option></select></label><label className="wide">CV or profile document<input type="file" name="cv" accept=".pdf,.doc,.docx" /></label><button className="button wide" type="submit">Submit volunteer interest <span>→</span></button>
+    </form>
+  </>;
   if (slug === "beneficiary") return <form className="full-form" action="mailto:hello@paccyfoundation.org" method="post" encType="text/plain">
     <h3 className="form-title">Parent or guardian</h3><label>Guardian name<input name="guardian_name" required /></label><label>National ID<input name="national_id" required /></label><label>Phone<input type="tel" name="phone" required /></label><label>District and sector<input name="location" required /></label>
     <h3 className="form-title">Child information</h3><label>Child name<input name="child_name" required /></label><label>Date of birth<input type="date" name="birth_date" required /></label><label>School and class<input name="school" required /></label><label>Household monthly income<input name="income" /></label><label className="wide">Reason for support<textarea name="reason" rows={5} required /></label><label>School recommendation<input type="file" name="school_recommendation" /></label><label>Birth certificate<input type="file" name="birth_certificate" /></label><button className="button wide" type="submit">Submit application <span>→</span></button>
@@ -198,14 +202,23 @@ function FormPage({ slug }: { slug: string }) {
   return null;
 }
 
-export default async function ContentPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ContentPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<{ success?: string | string[]; error?: string | string[] }> }) {
   const { slug } = await params;
   const page = pages[slug];
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const noticeText = Array.isArray(resolvedSearchParams.success) ? resolvedSearchParams.success[0] : resolvedSearchParams.success;
+  const errorText = Array.isArray(resolvedSearchParams.error) ? resolvedSearchParams.error[0] : resolvedSearchParams.error;
+  const notice = slug === "volunteer" && noticeText ? { type: "success" as const, text: decodeURIComponent(noticeText) } : slug === "volunteer" && errorText ? { type: "error" as const, text: decodeURIComponent(errorText) } : undefined;
   if (!page) return <main><Header/><section className="inner-hero"><p className="section-label light">404</p><h1>Page not found.</h1><a className="button" href="/">Return home</a></section></main>;
-  const saved=await getDb().select().from(content).where(eq(content.page,slug)).orderBy(desc(content.id));
+  let saved: { field: string; value: string }[] = [];
+  try {
+    saved = await getDb().select({ field: content.field, value: content.value }).from(content).where(eq(content.page,slug)).orderBy(desc(content.id));
+  } catch (error) {
+    console.warn(`Using default content for /${slug}:`, error instanceof Error ? error.message : error);
+  }
   const overrides=new Map(saved.map(item=>[item.field,item.value]));
   return <main><Header/><section className="inner-hero"><div><p className="section-label light">{overrides.get("eyebrow")??page.eyebrow}</p><h1>{overrides.get("title")??page.title}</h1><p>{overrides.get("intro")??page.intro}</p></div><span className="inner-number">{String(Object.keys(pages).indexOf(slug) + 2).padStart(2,"0")}</span></section>
-    <section className="inner-content"><FormPage slug={slug}/>{page.sections.length > 0 && <div className="content-grid">{page.sections.map((section,index)=><article className="content-card" key={section.title}><span>{String(index+1).padStart(2,"0")}</span><h2>{section.title}</h2><p>{section.text}</p>{section.items&&<ul>{section.items.map(item=><li key={item}>{item}</li>)}</ul>}{["news","events","campaigns","resources"].includes(slug)&&<a href="/contact">Learn more <b>→</b></a>}</article>)}</div>}</section>
+    <section className="inner-content"><FormPage slug={slug} notice={notice}/>{page.sections.length > 0 && <div className="content-grid">{page.sections.map((section,index)=><article className="content-card" key={section.title}><span>{String(index+1).padStart(2,"0")}</span><h2>{section.title}</h2><p>{section.text}</p>{section.items&&<ul>{section.items.map(item=><li key={item}>{item}</li>)}</ul>}{["news","events","campaigns","resources"].includes(slug)&&<a href="/contact">Learn more <b>→</b></a>}</article>)}</div>}</section>
     <section className="page-cta"><div><p className="section-label light">Ready to take part?</p><h2>Help a child stay close to possibility.</h2></div><div><a className="button" href="/donate">Support a child <span>↗</span></a><a className="cta-link" href="/volunteer">Become a volunteer →</a></div></section>
     <footer className="site-footer inner-footer"><div className="footer-brand"><img src="/images/paccy_faundation_logo.png" alt="Paccy Foundation logo" /><p><strong>Paccy Foundation</strong><br />Every child deserves a chance to learn.<small>Kigali, Rwanda<br /><a href="mailto:hello@paccyfoundation.org">hello@paccyfoundation.org</a></small></p></div><div><h3>Foundation</h3><a href="/">Home</a><a href="/about">About Us</a><a href="/founder">Founder</a><a href="/programs">Our Programs</a><a href="/who-we-help">Who We Help</a></div><div><h3>Take action</h3><a href="/get-involved">Get Involved</a><a href="/donate">Donate</a><a href="/volunteer">Volunteer</a><a href="/partners">Partners</a></div><div><h3>Discover</h3><a href="/news">Articles</a><a href="/events">Events</a><a href="/gallery">Gallery</a><a href="/success-stories">Success Stories</a><a href="/faq">FAQ</a></div><div><h3>Information</h3><a href="/contact">Contact Us</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms &amp; Conditions</a><a href="/child-protection">Child Protection Policy</a><a className="admin-link" href="/admin">Admin login</a></div><div className="footer-bottom"><p>© 2026 Paccy Foundation. All rights reserved.</p><p>Designed and developed by <strong>IMANZI Labs</strong></p></div></footer>
   </main>;

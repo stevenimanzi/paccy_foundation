@@ -1,0 +1,8 @@
+[vinext] failed to initialize the configured data cache adapter; using the default handler.
+[vinext] The KV data cache adapter requires a `VINEXT_KV_CACHE` KV namespace binding.
+  Add it to wrangler.jsonc:
+    "kv_namespaces": [{ "binding": "VINEXT_KV_CACHE", "id": "<your-kv-namespace-id>" }]
+[vinext] failed to initialize the configured image optimizer; serving images unoptimized.
+[vinext] The Cloudflare image optimizer requires an `IMAGES` Images binding.
+  Add it to wrangler.jsonc:
+    "images": { "binding": "IMAGES" }

@@ -1,8 +1,6 @@
 import { drizzle } from "drizzle-orm/mysql2";
-import mysql, { type Pool } from "mysql2/promise";
+import mysql from "mysql2/promise";
 import * as schema from "./schema";
-
-let pool: Pool | undefined;
 
 export function getDb() {
   const databaseUrl = process.env.DATABASE_URL;
@@ -12,6 +10,6 @@ export function getDb() {
     );
   }
 
-  pool ??= mysql.createPool(databaseUrl);
+  const pool = mysql.createPool(databaseUrl);
   return drizzle(pool, { schema, mode: "default" });
 }

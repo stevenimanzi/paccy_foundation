@@ -59,28 +59,32 @@ export async function createSession(userId: number): Promise<void> {
 }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(SESSION_COOKIE)?.value;
-  if (!token) return null;
-  const now = new Date().toISOString();
-  const rows = await getDb()
-    .select({
-      id: users.id,
-      name: users.name,
-      email: users.email,
-      role: users.role,
-    })
-    .from(userSessions)
-    .innerJoin(users, eq(userSessions.userId, users.id))
-    .where(
-      and(
-        eq(userSessions.tokenHash, tokenHash(token)),
-        gt(userSessions.expiresAt, now),
-        eq(users.status, "active"),
-      ),
-    )
-    .limit(1);
-  return rows[0] ?? null;
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(SESSION_COOKIE)?.value;
+    if (!token) return null;
+    const now = new Date().toISOString();
+    const rows = await getDb()
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role: users.role,
+      })
+      .from(userSessions)
+      .innerJoin(users, eq(userSessions.userId, users.id))
+      .where(
+        and(
+          eq(userSessions.tokenHash, tokenHash(token)),
+          gt(userSessions.expiresAt, now),
+          eq(users.status, "active"),
+        ),
+      )
+      .limit(1);
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function requireUser(returnTo = "/admin"): Promise<AuthUser> {
